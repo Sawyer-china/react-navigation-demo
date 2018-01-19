@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, Button } from 'react-native'
+import { StyleSheet, Text, View, Button, TextInput } from 'react-native'
 import { StackNavigator, TabNavigator, DrawerNavigator } from 'react-navigation'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
@@ -17,7 +17,7 @@ class RecentChatsScreen extends Component {
                 <Text style={{ fontSize: 30 }}>Home Screen</Text>
                 <Button
                     onPress={() => {
-                        navigate('Chat', { user: 'Lucys' })
+                        navigate('EditInfo', { user: 'Lucys' })
                     }}
                     title="Chat with Lucys"
                 />
@@ -49,20 +49,23 @@ class AllContactsScreen extends Component {
     }
 }
 
-const MainScreenNavigator = TabNavigator({
-    Recent: { screen: RecentChatsScreen },
-    All: {
-        screen: AllContactsScreen,
-        navigationOptions: {
-            headerTitle: 'All Page'
+class ChatScreen extends React.Component {
+    static navigationOptions = ({ navigation }) => {
+        const { state: { params }, setParams, navigate } = navigation
+        const isInfo = params.mode === 'info'
+        const { user } = params
+        return {
+            title: `Chat with ${user}`,
+            headerRight: (
+                <Button
+                    title={isInfo ? 'Done' : `${user}'s info`}
+                    onPress={() => {
+                        setParams({ mode: isInfo ? 'none' : 'info' })
+                    }}
+                />
+            )
         }
     }
-})
-
-class ChatScreen extends React.Component {
-    static navigationOptions = ({ navigation }) => ({
-        title: `Chat with ${navigation.state.params.user}`
-    })
     render() {
         const { params } = this.props.navigation.state
         return (
@@ -81,7 +84,81 @@ class ChatScreen extends React.Component {
     }
 }
 
-class NavigatorWrappingScreen extends React.Component {
+class ActivityIndicator extends Component {
+    render() {
+        return (
+            <Button
+                style={{
+                    color: '#ff0000'
+                }}
+                title="Test"
+                onPress={() => {}}
+            />
+        )
+    }
+}
+
+class EditInfoScreen extends Component {
+    constructor(props){
+        super()
+        const { params } = props.navigation.state
+        this.state = {
+            nickname: `${params.user}`
+        }
+    }
+    static navigationOptions = ({ navigation }) => {
+        const { params = {} } = navigation.state
+        let headerRight = (
+            <Button
+                title="Save"
+                onPress={params.handleSave ? params.handleSave : () => null}
+            />
+        )
+        if (params.isSaving) {
+            headerRight = <ActivityIndicator />
+        }
+        return { headerRight }
+    }
+
+    _handleSave = () => {
+        // Update state, show ActivityIndicator
+        this.props.navigation.setParams({ isSaving: true })
+        // this.setState((prevState, props) => ({
+        //     nickname: prevState.nickname + '123'
+        // }))
+        // Fictional function to save information in a store somewhere
+        // saveInfo().then(() => {
+        //     this.props.navigation.setParams({ isSaving: false })
+        // })
+    }
+
+    componentDidMount() {
+        // We can only set the function after the component has been initialized
+        this.props.navigation.setParams({ handleSave: this._handleSave })
+    }
+
+    render() {
+        return (
+            <TextInput
+                onChangeText={nickname => this.setState({ nickname })}
+                placeholder={'Nickname'}
+                value={this.state.nickname}
+            />
+        )
+    }
+}
+
+const MainScreenNavigator = TabNavigator({
+    Recent: { screen: RecentChatsScreen },
+    All: {
+        screen: AllContactsScreen,
+        navigationOptions: {
+            headerTitle: 'All Page'
+        }
+    }
+})
+
+class NavigatorWrappingScreen extends Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
@@ -103,6 +180,9 @@ const RootNavigator = StackNavigator({
     },
     Chat: {
         screen: ChatScreen
+    },
+    EditInfo: {
+        screen: EditInfoScreen
     }
 })
 
