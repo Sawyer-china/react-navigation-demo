@@ -13,7 +13,8 @@ react-navigation 是由 facebook 提供的路由切换的插件，致力于解�
 Expo下载地址：https://expo.io/learn
 
 ## 文件介绍
-
-StackNavigator.js // 该文件主要是
-
+StackNavigator.js // 堆栈式导航 - 如下图所示
 ![first-navigation-iphone](https://raw.githubusercontent.com/Sawyer-china/react-navigation-demo/master/first-navigation-iphone.png)
+
+NestingNavigators // 组合 TabNavigator 和 StackNavigator 导航 - 如下图所示
+![nested-iphone](https://raw.githubusercontent.com/Sawyer-china/react-navigation-demo/master/nested-iphone.png)
