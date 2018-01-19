@@ -16,4 +16,4 @@ Expo下载地址：https://expo.io/learn
 
 StackNavigator.js // 该文件主要是
 
-![avatar](http://baidu.com/pic/doge.png)
+![first-navigation-iphone](https://raw.githubusercontent.com/Sawyer-china/react-navigation-demo/master/first-navigation-iphone.png)
