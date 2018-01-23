@@ -231,7 +231,7 @@ const MainScreenNavigator = TabNavigator(
     },
     {
         lazy: true,
-        initialRouteName: 'All', // 默认加载哪一个组件
+        initialRouteName: 'Recent', // 默认加载哪一个组件
         tabBarOptions: {
             // tab 底部导航按钮的样式配置信息
             activeTintColor: '#ff0000', // 按下后的颜色

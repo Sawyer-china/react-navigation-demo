@@ -1,5 +1,6 @@
 import StackNavigator from './StackNavigator'
 import NestingNavigators from './NestingNavigators'
+import DrawerNavigator from './DrawerNavigator'
 
-export default NestingNavigators
+export default DrawerNavigator
 // export default StackNavigator
