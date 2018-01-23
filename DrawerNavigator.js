@@ -198,6 +198,6 @@ const MyApp = DrawerNavigator(
             )
         }
     }
-)
+) 
 
 export default MyApp
