@@ -1,7 +1,6 @@
 import StackNavigator from './StackNavigator'
-import NestingNavigators from './NestingNavigators'
+import TabNavigator from './TabNavigator'
 import DrawerNavigator from './DrawerNavigator'
-import NavigationActions from './NavigationActions'
 
-export default NavigationActions
+export default TabNavigator
 // export default StackNavigator
