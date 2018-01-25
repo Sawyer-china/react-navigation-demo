@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Platform, StyleSheet, View, Text, Button, Image } from 'react-native'
-import { StackNavigator, NavigationActions } from 'react-navigation'
+import { StackNavigator } from 'react-navigation'
 
 class MyHomeScreen extends Component {
     static navigationOptions = ({ navigation }) => {

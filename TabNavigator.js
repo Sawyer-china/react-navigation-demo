@@ -180,16 +180,38 @@ export default TabNavigator(
              * 指示器的样式设置  only andriod
              */
             indicatorStyle: {
-                backgroundColor: '#f0f0f0'
+                backgroundColor: '#fff',
+                flex: 1,
+                height: 50
             },
-            // labelStyle: {
-            //     color: '#000000'
-            // },
+            /**
+             * 底部导航 文字 部分样式
+             */
+            labelStyle: {
+                // color: '#000000',
+                fontSize: 11,
+                marginTop: Platform.OS === 'ios' ? 14 : 0
+            },
+            /**
+             * 底部导航 icon 部分样式
+             */
             // iconStyle: {
             //     color: '#ff0000'
             // },
+            /**
+             * 底部 tab 容器样式
+             */
             style: {
-                backgroundColor: '#f0f0f0'
+                backgroundColor: '#fff',
+                height: 50,
+                borderTopColor: '#f1f1f1',
+                shadowColor: '#aaa',
+                shadowOffset: {
+                    width: 0,
+                    height: 4
+                },
+                shadowOpacity: 0.6,
+                shadowRadius: 10
             },
             /**
              * 选中时的 tab label 和 icon 的颜色
@@ -206,7 +228,7 @@ export default TabNavigator(
             /**
              * 未选中时的 tab 的背景色 ios 专属
              */
-            inactiveBackgroundColor: '#f1f1f1'
+            inactiveBackgroundColor: '#fff'
         }
     }
 )

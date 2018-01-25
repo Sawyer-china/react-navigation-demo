@@ -1,33 +1,57 @@
 import React, { Component } from 'react'
 import {
+    Platform,
     StyleSheet,
-    Text,
     View,
+    Text,
     Button,
-    TextInput,
-    Icon,
     Image,
-    ScrollView
+    ScrollView,
+    StatusBar
 } from 'react-native'
-import { DrawerNavigator, DrawerItems } from 'react-navigation'
+import { DrawerNavigator, DrawerItems, SafeAreaView } from 'react-navigation'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
-class MyHomeScreen extends Component {
+class MyHomeScreen extends React.Component {
     static navigationOptions = {
         drawerLabel: 'Home'
     }
 
+    openDrawer = () => {
+        // 打开抽屉式导航
+        const { navigate } = this.props.navigation
+        navigate('DrawerOpen')
+        navigate('DrawerOpen') // 关闭抽屉式导航
+        navigate('DrawerToggle') // 切换抽屉式导航的 显示 / 隐藏
+    }
+
     render() {
         return (
-            <Button
-                onPress={() => this.props.navigation.navigate('Notifications')}
-                title="Go to notifications"
-            />
+            <View
+                style={{
+                    flex: 1,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexDirection: 'column'
+                }}
+            >
+                <Button
+                    onPress={() =>
+                        this.props.navigation.navigate('Notifications')}
+                    title="Go to notifications"
+                />
+                <Button onPress={() => this.openDrawer()} title="OpenDrawer" />
+                <Ionicons
+                        name={'ios-home'}
+                        size={26}
+                        style={{ color: '#ff0000' }}
+                    />
+            </View>
         )
     }
 }
 
-class MyNotificationsScreen extends Component {
+class MyNotificationsScreen extends React.Component {
     static navigationOptions = {
         drawerLabel: 'Notifications'
     }
@@ -49,155 +73,145 @@ const styles = StyleSheet.create({
     }
 })
 
-const MyApp = DrawerNavigator(
+export default DrawerNavigator(
     {
         Home: {
-            screen: MyHomeScreen
+            screen: MyHomeScreen,
+            navigationOptions: {
+                /**
+                 * drawer 导航 icon
+                 */
+                drawerIcon: ({ tintColor, focused }) =>
+                    <Ionicons
+                        name={focused ? 'ios-home' : 'ios-home-outline'}
+                        size={26}
+                        style={{ color: tintColor }}
+                    />,
+                /**
+                 * drawerLabel或headerTitle 备用标题
+                 */
+                title: '首页备用',
+                /**
+                 * drawer 标题
+                 */
+                // drawerLabel: '首页label'
+            }
         },
         Notifications: {
-            screen: MyNotificationsScreen
-        },
-        Notifications0: {
-            screen: MyNotificationsScreen
-        },
-        Notifications1: {
-            screen: MyNotificationsScreen
-        },
-        Notifications2: {
-            screen: MyNotificationsScreen
-        },
-        Notifications3: {
-            screen: MyNotificationsScreen
-        },
-        Notifications4: {
-            screen: MyNotificationsScreen
-        },
-        Notifications5: {
-            screen: MyNotificationsScreen
-        },
-        Notifications6: {
-            screen: MyNotificationsScreen
-        },
-        Notifications7: {
-            screen: MyNotificationsScreen
-        },
-        Notifications8: {
-            screen: MyNotificationsScreen
-        },
-        Notifications9: {
-            screen: MyNotificationsScreen
-        },
-        Notifications10: {
-            screen: MyNotificationsScreen
-        },
-        Notifications11: {
-            screen: MyNotificationsScreen
-        },
-        Notifications12: {
-            screen: MyNotificationsScreen
-        },
-        Notifications13: {
-            screen: MyNotificationsScreen
-        },
-        Notifications14: {
-            screen: MyNotificationsScreen
-        },
-        Notifications15: {
-            screen: MyNotificationsScreen
-        },
-        Notifications16: {
-            screen: MyNotificationsScreen
-        },
-        Notifications17: {
-            screen: MyNotificationsScreen
-        },
-        Notifications18: {
-            screen: MyNotificationsScreen
-        },
-        Notifications19: {
-            screen: MyNotificationsScreen
-        },
-        Notifications20: {
-            screen: MyNotificationsScreen
-        },
-        Notifications21: {
-            screen: MyNotificationsScreen
+            screen: MyNotificationsScreen,
+            navigationOptions: {
+                /**
+                 * drawer 导航 icon
+                 */
+                drawerIcon: ({ tintColor, focused }) =>
+                    <Ionicons
+                        name={focused ? 'ios-alarm' : 'ios-alarm-outline'}
+                        size={26}
+                        style={{ color: tintColor }}
+                    />
+            }
         }
     },
     {
-        drawerWidth: 300,
+        /**
+         * 抽屉式导航的 宽度
+         */
+        // drawerWidth: 200,
+        /**
+         * 抽屉式导航的 从哪个方向出来, rihgt, left
+         */
         drawerPosition: 'left',
+        /**
+         * 自定义抽屉菜单的 内容
+         */
+        // contentComponent: props => {
+        //     console.log(props)
+        //     return (
+        //         <View>
+        //             <View style={{ height: 90, backgroundColor: '#ff0000' }}>
+        //                 <View style={{ height: 20 }} />
+        //                 <Text>123</Text>
+        //             </View>
+        //             <StatusBar backgroundColor="blue" barStyle="dark-content" />
+        //             <ScrollView>
+        //                 <SafeAreaView>
+        //                     {/* SafeAreaView
+        //                        匹配iphonex  安全区域视图 */}
+        //                     <DrawerItems {...props} />
+        //                 </SafeAreaView>
+        //             </ScrollView>
+        //         </View>
+        //     )
+        // },
+        /**
+         * 启用本地动画，测试好像没啥变化
+         */
+        useNativeAnimations: false,
+        /**
+         * 抽屉容器的背景颜色 默认为白色
+         */
+        drawerBackgroundColor: '#fff',
+        /**
+         * 路由默认
+         */
+        initialRouteName: 'Home',
+        /**
+         * 需要显示的路由，也可以进行排序
+         */
+        // order: []
+        backBehavior: '',
+        /**
+         * 内容选项
+         */
         contentOptions: {
-            activeTintColor: '#e91e63',
-            activeBackgroundColor: '#ffffff',
-            itemsContainerStyle: {
-                marginVertical: 0
+            items: [],
+            activeItemKey: 'Notifications',
+            /**
+             * 当前选中 tab 的色调
+             */
+            activeTintColor: '#ff0000',
+            /**
+             * 当前选中 tab 的背景色调
+             */
+            activeBackgroundColor: '#fff',
+            /**
+             * 未选中时的 色调
+             */
+            inactiveTintColor: '#000',
+            /**
+             * 未选中时的 背景颜色
+             */
+            inactiveBackgroundColor: '#fefefe',
+            /**
+             * 按下时触发
+             */
+            onItemPress(router) {
+                console.log(router)
             },
+            /**
+             * 容器的样式 View
+             */
+            itemsContainerStyle: {
+                // backgroundColor: 'yellow'
+            },
+            /**
+             * 单个item容器样式 View
+             */
+            itemStyle: {
+                // backgroundColor: 'yellow'
+            },
+            /**
+             * label 字体样式
+             */
+            labelStyle: {
+                // color: '#000'
+            },
+            /**
+             * icon 容器样式
+             */
             iconContainerStyle: {
-                opacity: 1
+                // backgroundColor: 'blue'
             }
-        },
-        contentComponent: props => {
-            return (
-                <View style={{ flex: 1 }}>
-                    <View
-                        style={{
-                            paddingVertical: 20,
-                            paddingHorizontal: 15,
-                            backgroundColor: '#fefefe',
-                            borderBottomColor: '#000',
-                            borderBottomWidth: 1
-                        }}
-                    >
-                        <Text style={{ color: '#000' }}>
-                            ser Namesrwefsafsaf
-                        </Text>
-                        <Text style={{ color: '#ff0000' }}>
-                            ser Namesrwefsafsaf
-                        </Text>
-                        <Text style={{ color: '#000' }}>
-                            ser Namesrwefsafsaf
-                        </Text>
-                        <Text style={{ color: '#000' }}>
-                            ser Namesrwefsafsaf
-                        </Text>
-                    </View>
-                    <ScrollView
-                        style={{
-                            flex: 1,
-                            flexDirection: 'column',
-                            height: 200,
-                            width: 300
-                        }}
-                    >
-                        <DrawerItems {...props} />
-                    </ScrollView>
-                    <View
-                        style={{
-                            paddingVertical: 20,
-                            paddingHorizontal: 15,
-                            backgroundColor: '#fefefe',
-                            borderBottomColor: '#000',
-                            borderBottomWidth: 1
-                        }}
-                    >
-                        <Text style={{ color: '#000' }}>
-                            ser Namesrwefsafsaf
-                        </Text>
-                        <Text style={{ color: '#ff0000' }}>
-                            ser Namesrwefsafsaf
-                        </Text>
-                        <Text style={{ color: '#000' }}>
-                            ser Namesrwefsafsaf
-                        </Text>
-                        <Text style={{ color: '#000' }}>
-                            ser Namesrwefsafsaf
-                        </Text>
-                    </View>
-                </View>
-            )
         }
     }
-) 
-
-export default MyApp
+)
