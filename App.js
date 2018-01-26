@@ -3,5 +3,7 @@ import TabNavigator from './TabNavigator'
 import DrawerNavigator from './DrawerNavigator'
 import NavigationActions from './NavigationActions'
 
-export default NavigationActions
+import ReduxExample from './ReduxExample'
+
+export default ReduxExample
 // export default StackNavigator
