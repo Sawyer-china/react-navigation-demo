@@ -8,7 +8,6 @@ import AppWithNavigationState from './navigators/AppNavigator'
 
 export default class ReduxExampleApp extends React.Component {
     store = createStore(AppReducer)
-
     render() {
         return (
             <Provider store={this.store}>

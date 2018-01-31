@@ -13,8 +13,18 @@ export const AppNavigator = StackNavigator({
     Profile: { screen: ProfileScreen }
 })
 
-const AppWithNavigationState = ({ dispatch, nav }) =>
-    <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })} />
+const AppWithNavigationState = o => {
+    const { dispatch, nav, auth } = o
+    console.log(nav)
+    return (
+        <AppNavigator
+            navigation={addNavigationHelpers({
+                dispatch,
+                state: nav
+            })}
+        />
+    )
+}
 
 AppWithNavigationState.propTypes = {
     dispatch: PropTypes.func.isRequired,
@@ -22,7 +32,8 @@ AppWithNavigationState.propTypes = {
 }
 
 const mapStateToProps = state => ({
-    nav: state.nav
+    nav: state.nav,
+    auth: state.auth
 })
 
 export default connect(mapStateToProps)(AppWithNavigationState)

@@ -15,10 +15,14 @@ const styles = StyleSheet.create({
     }
 })
 
-const ProfileScreen = () =>
-    <View style={styles.container}>
-        <Text style={styles.welcome}>Profile Screen</Text>
-    </View>
+const ProfileScreen = (o) => {
+    console.log(o)
+    return (
+        <View style={styles.container}>
+            <Text style={styles.welcome}>Profile Screen</Text>
+        </View>
+    )
+}
 
 ProfileScreen.navigationOptions = {
     title: 'Profile'
