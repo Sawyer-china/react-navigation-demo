@@ -4,6 +4,7 @@ import DrawerNavigator from './DrawerNavigator'
 import NavigationActions from './NavigationActions'
 
 import ReduxExample from './ReduxExample'
+// import ReduxExample from './ReduxExampleDemo'
 
 export default ReduxExample
 // export default StackNavigator
