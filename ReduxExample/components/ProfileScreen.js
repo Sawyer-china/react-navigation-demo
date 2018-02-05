@@ -28,4 +28,13 @@ ProfileScreen.navigationOptions = {
     title: 'Profile'
 }
 
+function test(type) {
+    return function(payload) {
+        return {
+            type,
+            payload
+        }
+    }
+}
+
 export default ProfileScreen
