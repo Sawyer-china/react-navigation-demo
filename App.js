@@ -3,15 +3,15 @@
 // import DrawerNavigator from './DrawerNavigator'
 // import NavigationActions from './NavigationActions'
 
-// import ReduxExample from './ReduxExample'
+export { default as ReduxExample } from './ReduxExample'
 
-import App from './react-navive-dva-antd'
+// import App from './react-navive-dva-antd'
 // import ReduxExample from './ReduxExampleDemo'
 
 // export default ReduxExample
 // export default StackNavigator
 
-export default App
+// export default App
 // export default NavigationActions
 
 // export default DrawerNavigator
